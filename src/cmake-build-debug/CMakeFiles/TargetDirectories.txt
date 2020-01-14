@@ -1,0 +1,3 @@
+/home/anton/freecell/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/anton/freecell/src/cmake-build-debug/CMakeFiles/src.dir
+/home/anton/freecell/src/cmake-build-debug/CMakeFiles/edit_cache.dir

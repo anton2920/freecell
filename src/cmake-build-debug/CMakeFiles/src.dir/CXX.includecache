@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/anton/freecell/src/libs/card.hpp
+utility
+-
+SFML/Graphics/RectangleShape.hpp
+-
+
+/home/anton/freecell/src/libs/game.cpp
+utility
+-
+ctime
+-
+array
+-
+game.hpp
+/home/anton/freecell/src/libs/game.hpp
+
+/home/anton/freecell/src/libs/game.hpp
+deque
+-
+cstdint
+-
+card.hpp
+/home/anton/freecell/src/libs/card.hpp
+
+/home/anton/freecell/src/main.cpp
+libs/game.hpp
+/home/anton/freecell/src/libs/game.hpp
+
