@@ -9,10 +9,12 @@
 /home/anton/freecell/src/libs/card.hpp
 utility
 -
-SFML/Graphics/RectangleShape.hpp
+SFML/Graphics.hpp
 -
 
 /home/anton/freecell/src/libs/game.cpp
+iostream
+-
 utility
 -
 ctime
@@ -27,10 +29,8 @@ deque
 -
 cstdint
 -
+SFML/Graphics.hpp
+-
 card.hpp
 /home/anton/freecell/src/libs/card.hpp
-
-/home/anton/freecell/src/main.cpp
-libs/game.hpp
-/home/anton/freecell/src/libs/game.hpp
 

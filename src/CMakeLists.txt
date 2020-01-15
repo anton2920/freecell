@@ -8,3 +8,5 @@ set(CARD libs/card.cpp libs/card.hpp)
 set(STATS libs/stats.cpp libs/stats.hpp)
 
 add_executable(src main.cpp ${GAME} ${CARD} ${STATS})
+
+target_link_libraries(src sfml-system sfml-window sfml-graphics)

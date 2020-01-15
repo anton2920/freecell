@@ -1,7 +1,7 @@
 #include "card.hpp"
 
-cell::card::card(const std::pair<VALUE, SUIT> type, const std::pair<int, int> coords, cell::card::POSITION pos)
-        : type(type), coords(coords), pos(pos) {}
+cell::card::card(const std::pair<VALUE, SUIT> type, const sf::Vector2f coords, cell::card::POSITION pos, cell::card::STATE state)
+        : type(type), coords(coords), pos(pos), st(state) {}
 
 const std::pair<cell::card::VALUE, cell::card::SUIT> &cell::card::getType() const {
 
@@ -9,7 +9,7 @@ const std::pair<cell::card::VALUE, cell::card::SUIT> &cell::card::getType() cons
     return type;
 }
 
-const std::pair<int, int> &cell::card::getCoords() const {
+sf::Vector2f cell::card::getCoords() const {
 
     /* Returning value */
     return coords;
@@ -27,7 +27,7 @@ void cell::card::setType(const std::pair<VALUE, SUIT> &_type) {
     card::type = _type;
 }
 
-void cell::card::setCoords(const std::pair<int, int> &_coords) {
+void cell::card::setCoords(const sf::Vector2f &_coords) {
 
     /* Initializing variables */
     card::coords = _coords;
