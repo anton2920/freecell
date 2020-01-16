@@ -6,6 +6,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "card.hpp"
+#include "holders/safehouse.hpp"
+#include "holders/endgame.hpp"
 
 namespace cell {
     const int window_panel_size = 20;
@@ -23,7 +25,6 @@ namespace cell {
             return (_seed = (_seed * MULT + INCR) & MASK) >> 16;
         }
     private:
-        friend class game;
         unsigned int _seed;
         enum { MULT = 214013, INCR = 2531011, MASK = (1U << 31) - 1 };
     };
@@ -46,8 +47,8 @@ namespace cell {
             };
 
             enum man {
-                manl_x = 632,
-                mans_y = 384,
+                manl_x = 320,
+                mans_y = 446,
                 mans_w = 36,
                 mans_h = 36,
                 manr_offset = mans_w,
@@ -61,32 +62,32 @@ namespace cell {
                 manb_y_offset = window_panel_size
             };
 
-            enum safehouse {
-                safehouse_x = 0,
-                safehouse_y = 20,
-                safehouse_w = 284,
-                safehouse_h = 96
+            enum cursors {
+                cursor_down_x = 392,
+                cursor_down_y = 446,
+                cursor_down_w = 14,
+                cursor_down_h = 27,
+                cursor_up_x = 406,
+                cursor_up_y = 446,
+                cursor_up_w = 9,
+                cursor_up_h = 19
             };
 
-            enum endgame {
-                endgame_x_offset = 64
-            };
-
-            enum card_sizes {
-                card_x = 632,
-                card_y = 0,
-                card_w = 71,
-                card_h = 96,
+            sf::RenderWindow *window;
+            sf::Texture texture;
+        public:
+            enum card_row_sizes {
                 card_row_x = 7,
                 card_row_y = window_panel_size + 106,
                 card_row_space = 7,
                 card_row_overlap_space = 18
             };
 
-            sf::RenderWindow *window;
-            sf::Texture texture;
+            enum cursor_type {
+                up,
+                down
+            };
 
-        public:
             explicit drawSystem(sf::RenderWindow *window);
             drawSystem(sf::RenderWindow *window, const sf::Texture &texture);
             ~drawSystem() = default;
@@ -94,8 +95,11 @@ namespace cell {
             static void initCards(std::deque<card> &t);
 
             void drawField();
+            void drawCard(card &c);
             void drawCards(std::deque<card> &t);
+            void drawEndgame(endgame *endg);
             void drawMan(GAMESTATE st);
+            void drawCursor(cursor_type t);
         };
     private:
         GAMESTATE state = GAMESTATE::start;
@@ -106,6 +110,9 @@ namespace cell {
         void deal();
 
         drawSystem *draw;
+
+        safehouse *sh;
+        endgame *eg;
 
         enum gameWindow {
             window_w = 632,
@@ -121,6 +128,12 @@ namespace cell {
 
         void start(int n = -1);
         void stop();
+
+        [[nodiscard]] cell::card *findCard(const sf::Vector2f &coords) const;
+        [[nodiscard]] cell::card *findBottomCard(const sf::Vector2f &coords) const;
+
+        static cell::card *selectCard(cell::card &card);
+        cell::card *selectCard(const sf::Vector2f &coords);
     };
 }
 

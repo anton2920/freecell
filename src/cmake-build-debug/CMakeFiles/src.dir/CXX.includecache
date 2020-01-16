@@ -13,8 +13,6 @@ SFML/Graphics.hpp
 -
 
 /home/anton/freecell/src/libs/game.cpp
-iostream
--
 utility
 -
 ctime
@@ -33,4 +31,24 @@ SFML/Graphics.hpp
 -
 card.hpp
 /home/anton/freecell/src/libs/card.hpp
+holders/safehouse.hpp
+/home/anton/freecell/src/libs/holders/safehouse.hpp
+holders/endgame.hpp
+/home/anton/freecell/src/libs/holders/endgame.hpp
+
+/home/anton/freecell/src/libs/holders/endgame.hpp
+stack
+-
+placeholder.hpp
+/home/anton/freecell/src/libs/holders/placeholder.hpp
+
+/home/anton/freecell/src/libs/holders/placeholder.hpp
+array
+-
+../card.hpp
+/home/anton/freecell/src/libs/card.hpp
+
+/home/anton/freecell/src/libs/holders/safehouse.hpp
+placeholder.hpp
+/home/anton/freecell/src/libs/holders/placeholder.hpp
 

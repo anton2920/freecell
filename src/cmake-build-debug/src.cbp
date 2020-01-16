@@ -90,10 +90,31 @@
 		<Unit filename="/home/anton/freecell/src/libs/card.hpp">
 			<Option target="src"/>
 		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/drawSystem.cpp">
+			<Option target="src"/>
+		</Unit>
 		<Unit filename="/home/anton/freecell/src/libs/game.cpp">
 			<Option target="src"/>
 		</Unit>
 		<Unit filename="/home/anton/freecell/src/libs/game.hpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/endgame.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/endgame.hpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/placeholder.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/placeholder.hpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/safehouse.cpp">
+			<Option target="src"/>
+		</Unit>
+		<Unit filename="/home/anton/freecell/src/libs/holders/safehouse.hpp">
 			<Option target="src"/>
 		</Unit>
 		<Unit filename="/home/anton/freecell/src/libs/stats.cpp">

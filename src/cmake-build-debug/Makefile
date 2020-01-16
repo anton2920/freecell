@@ -150,6 +150,33 @@ libs/card.cpp.s:
 	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/card.cpp.s
 .PHONY : libs/card.cpp.s
 
+libs/drawSystem.o: libs/drawSystem.cpp.o
+
+.PHONY : libs/drawSystem.o
+
+# target to build an object file
+libs/drawSystem.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/drawSystem.cpp.o
+.PHONY : libs/drawSystem.cpp.o
+
+libs/drawSystem.i: libs/drawSystem.cpp.i
+
+.PHONY : libs/drawSystem.i
+
+# target to preprocess a source file
+libs/drawSystem.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/drawSystem.cpp.i
+.PHONY : libs/drawSystem.cpp.i
+
+libs/drawSystem.s: libs/drawSystem.cpp.s
+
+.PHONY : libs/drawSystem.s
+
+# target to generate assembly for a file
+libs/drawSystem.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/drawSystem.cpp.s
+.PHONY : libs/drawSystem.cpp.s
+
 libs/game.o: libs/game.cpp.o
 
 .PHONY : libs/game.o
@@ -176,6 +203,87 @@ libs/game.s: libs/game.cpp.s
 libs/game.cpp.s:
 	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/game.cpp.s
 .PHONY : libs/game.cpp.s
+
+libs/holders/endgame.o: libs/holders/endgame.cpp.o
+
+.PHONY : libs/holders/endgame.o
+
+# target to build an object file
+libs/holders/endgame.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/endgame.cpp.o
+.PHONY : libs/holders/endgame.cpp.o
+
+libs/holders/endgame.i: libs/holders/endgame.cpp.i
+
+.PHONY : libs/holders/endgame.i
+
+# target to preprocess a source file
+libs/holders/endgame.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/endgame.cpp.i
+.PHONY : libs/holders/endgame.cpp.i
+
+libs/holders/endgame.s: libs/holders/endgame.cpp.s
+
+.PHONY : libs/holders/endgame.s
+
+# target to generate assembly for a file
+libs/holders/endgame.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/endgame.cpp.s
+.PHONY : libs/holders/endgame.cpp.s
+
+libs/holders/placeholder.o: libs/holders/placeholder.cpp.o
+
+.PHONY : libs/holders/placeholder.o
+
+# target to build an object file
+libs/holders/placeholder.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/placeholder.cpp.o
+.PHONY : libs/holders/placeholder.cpp.o
+
+libs/holders/placeholder.i: libs/holders/placeholder.cpp.i
+
+.PHONY : libs/holders/placeholder.i
+
+# target to preprocess a source file
+libs/holders/placeholder.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/placeholder.cpp.i
+.PHONY : libs/holders/placeholder.cpp.i
+
+libs/holders/placeholder.s: libs/holders/placeholder.cpp.s
+
+.PHONY : libs/holders/placeholder.s
+
+# target to generate assembly for a file
+libs/holders/placeholder.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/placeholder.cpp.s
+.PHONY : libs/holders/placeholder.cpp.s
+
+libs/holders/safehouse.o: libs/holders/safehouse.cpp.o
+
+.PHONY : libs/holders/safehouse.o
+
+# target to build an object file
+libs/holders/safehouse.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/safehouse.cpp.o
+.PHONY : libs/holders/safehouse.cpp.o
+
+libs/holders/safehouse.i: libs/holders/safehouse.cpp.i
+
+.PHONY : libs/holders/safehouse.i
+
+# target to preprocess a source file
+libs/holders/safehouse.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/safehouse.cpp.i
+.PHONY : libs/holders/safehouse.cpp.i
+
+libs/holders/safehouse.s: libs/holders/safehouse.cpp.s
+
+.PHONY : libs/holders/safehouse.s
+
+# target to generate assembly for a file
+libs/holders/safehouse.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/safehouse.cpp.s
+.PHONY : libs/holders/safehouse.cpp.s
 
 libs/stats.o: libs/stats.cpp.o
 
@@ -243,9 +351,21 @@ help:
 	@echo "... libs/card.o"
 	@echo "... libs/card.i"
 	@echo "... libs/card.s"
+	@echo "... libs/drawSystem.o"
+	@echo "... libs/drawSystem.i"
+	@echo "... libs/drawSystem.s"
 	@echo "... libs/game.o"
 	@echo "... libs/game.i"
 	@echo "... libs/game.s"
+	@echo "... libs/holders/endgame.o"
+	@echo "... libs/holders/endgame.i"
+	@echo "... libs/holders/endgame.s"
+	@echo "... libs/holders/placeholder.o"
+	@echo "... libs/holders/placeholder.i"
+	@echo "... libs/holders/placeholder.s"
+	@echo "... libs/holders/safehouse.o"
+	@echo "... libs/holders/safehouse.i"
+	@echo "... libs/holders/safehouse.s"
 	@echo "... libs/stats.o"
 	@echo "... libs/stats.i"
 	@echo "... libs/stats.s"
