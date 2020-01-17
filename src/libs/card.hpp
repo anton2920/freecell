@@ -53,7 +53,7 @@ namespace cell {
     private:
         std::pair <VALUE, SUIT> type;
         sf::Vector2f coords;
-        POSITION pos;
+        POSITION p;
         STATE st;
     public:
         explicit card(std::pair<VALUE, SUIT> _type = {VALUE::blank, SUIT::blank},
@@ -76,7 +76,12 @@ namespace cell {
         bool isRed();
 
         bool canMove(card &other);
+        bool canMoveEndgame(card &other);
+
         bool move(card &other);
+        void moveToFreePos(const sf::Vector2i &p);
+
+        [[nodiscard]] static bool compCoords(const card &self, const card &other);
     };
 }
 

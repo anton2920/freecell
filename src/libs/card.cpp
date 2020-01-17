@@ -2,14 +2,14 @@
 #include "game.hpp"
 
 cell::card::card(const std::pair<VALUE, SUIT> type, const sf::Vector2f coords, cell::card::POSITION pos, cell::card::STATE state)
-        : type(type), coords(coords), pos(pos), st(state) {}
+        : type(type), coords(coords), p(pos), st(state) {}
 
 cell::card::card(const cell::card &other) {
 
     /* Initializing variables */
     this->type = other.type;
     this->coords = other.coords;
-    this->pos = other.pos;
+    this->p = other.p;
     this->st = other.st;
 }
 
@@ -28,7 +28,7 @@ sf::Vector2f cell::card::getCoords() const {
 cell::card::POSITION cell::card::getPos() const {
 
     /* Returning value */
-    return pos;
+    return p;
 }
 
 cell::card::STATE cell::card::getSt() const {
@@ -52,7 +52,7 @@ void cell::card::setCoords(const sf::Vector2f &_coords) {
 void cell::card::setPos(cell::card::POSITION _pos) {
 
     /* Initializing variables */
-    card::pos = _pos;
+    card::p = _pos;
 }
 
 void cell::card::setSt(cell::card::STATE _st) {
@@ -102,4 +102,35 @@ sf::IntRect cell::card::getSpriteRect() const {
 
     /* Returning value */
     return rect;
+}
+
+bool cell::card::compCoords(const cell::card &self, const cell::card &other) {
+
+    /* Returning value */
+    return self.coords.y < other.coords.y;
+}
+
+bool cell::card::canMoveEndgame(cell::card &other) {
+
+    /* Returning value */
+    return (static_cast<int>(this->type.first) - static_cast<int>(other.type.first) == 1) &&
+            (this->type.second == other.type.second);
+}
+
+void cell::card::moveToFreePos(const sf::Vector2i &p) {
+
+    /* Initializing variables */
+    sf::Vector2f findCoords;
+    findCoords.x = cell::game::drawSystem::card_row_x;
+    findCoords.y = cell::game::drawSystem::card_row_y;
+
+    /* Main part */
+    for (int i = 0; i < 8; ++i) {
+        if (p.x >= findCoords.x && p.x <= findCoords.x + cell::card::card_w) {
+            this->setCoords(findCoords);
+            break;
+        }
+
+        findCoords.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
+    }
 }

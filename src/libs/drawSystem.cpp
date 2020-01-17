@@ -39,7 +39,7 @@ void cell::game::drawSystem::drawMan(cell::game::GAMESTATE st) {
         sprite.setPosition(sf::Vector2f(manc_x, manc_y));
         if (pos.x <= cell::safehouse::safehouse_w && pos.y <= cell::safehouse::safehouse_h) {
             man_offset = manl_x;
-        } else if (pos.x >= cell::safehouse::safehouse_w + cell::endgame::endgame_x_offset && pos.y <= cell::safehouse::safehouse_h) {
+        } else if (pos.x >= cell::safehouse::safehouse_x + cell::endgame::endgame_x_offset && pos.y <= cell::safehouse::safehouse_h) {
             man_offset = manl_x + manr_offset;
         }
         sprite.setTextureRect(sf::IntRect(man_offset, mans_y, mans_w, mans_h));
@@ -94,7 +94,7 @@ void cell::game::drawSystem::drawEndgame(cell::endgame *endg) {
     if (!endg->isEmpty()) {
         for (int i = 0; i < 4; ++i) {
             if (!endg->isEmpty(i)) {
-                this->drawCard(*endg->getHouse()[i].top());
+                this->drawCard(const_cast<card &>(endg->getHouse()[i].top()));
             }
         }
     }
@@ -108,7 +108,7 @@ void cell::game::drawSystem::drawCursor(cursor_type t) {
 
     /* Main part */
     sprite.setPosition(static_cast<float>(position.x - static_cast<float>(((t == up) ? cursor_up_w : cursor_down_w)) / 2.f),
-            static_cast<float>(position.y - ((t == up) ? cursor_up_h : cursor_down_h)));
+            static_cast<float>(position.y - ((t == up) ? 0 : cursor_down_h)));
     if (t == up) {
         sprite.setTextureRect(sf::IntRect(cursor_up_x, cursor_up_y, cursor_up_w, cursor_up_h));
     } else {

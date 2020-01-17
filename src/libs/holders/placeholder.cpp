@@ -13,7 +13,7 @@ bool cell::placeholder::isEmpty(int n) {
             flag = emptyFlags[n];
             break;
         default:
-            flag = emptyFlags[0] || emptyFlags[1] || emptyFlags[2] || emptyFlags[3];
+            flag = emptyFlags[0] && emptyFlags[1] && emptyFlags[2] && emptyFlags[3];
             break;
     }
 

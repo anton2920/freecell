@@ -67,9 +67,9 @@ namespace cell {
                 cursor_down_y = 446,
                 cursor_down_w = 14,
                 cursor_down_h = 27,
-                cursor_up_x = 406,
+                cursor_up_x = 407,
                 cursor_up_y = 446,
-                cursor_up_w = 9,
+                cursor_up_w = 8,
                 cursor_up_h = 19
             };
 
@@ -134,6 +134,8 @@ namespace cell {
 
         static cell::card *selectCard(cell::card &card);
         cell::card *selectCard(const sf::Vector2f &coords);
+
+        bool isFreeColomn(const sf::Vector2i &pos);
     };
 }
 
