@@ -21,6 +21,8 @@ ctime
 -
 array
 -
+iostream
+-
 game.hpp
 /home/anton/freecell/src/libs/game.hpp
 

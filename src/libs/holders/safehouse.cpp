@@ -1,6 +1,6 @@
 #include "safehouse.hpp"
 
-void cell::safehouse::put(card &c, const sf::Vector2i &pos) {
+void cell::safehouse::put(card *c, const sf::Vector2i &pos) {
 
     /* Initializing variables */
     int whichOne = pos.x / cell::card::card_w;
@@ -8,31 +8,25 @@ void cell::safehouse::put(card &c, const sf::Vector2i &pos) {
 
     /* Main part */
     if (this->emptyFlags[whichOne] && whichOne < 4) {
-        c.setPos(cell::card::POSITION::safehouse);
+        c->setPos(cell::card::POSITION::safehouse);
         coords.x = safehouse_x + cell::card::card_w * whichOne;
         coords.y = safehouse_y;
-        c.setCoords(coords);
+        c->setCoords(coords);
 
         this->emptyFlags[whichOne] = false;
-        this->house[whichOne] = &c;
+        this->house[whichOne] = c;
     }
 }
 
-cell::card cell::safehouse::get(const sf::Vector2f &pos) {
+void cell::safehouse::get(const sf::Vector2f &pos) {
 
     /* Initializing variables */
     int whichOne = static_cast<int>(pos.x) / cell::card::card_w;
-    cell::card newCard;
 
     /* Main part */
     if (!this->emptyFlags[whichOne] && whichOne < 4) {
         this->emptyFlags[whichOne] = true;
-        this->house[whichOne]->setPos(cell::card::POSITION::tabled);
-        return *this->house[whichOne];
     }
-
-    /* Returning value */
-    return newCard;
 }
 
 bool cell::safehouse::isInArea(const sf::Vector2i &pos) {

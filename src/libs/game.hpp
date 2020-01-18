@@ -131,11 +131,18 @@ namespace cell {
 
         [[nodiscard]] cell::card *findCard(const sf::Vector2f &coords) const;
         [[nodiscard]] cell::card *findBottomCard(const sf::Vector2f &coords) const;
+        cell::card *findLowerCard(const cell::card *c) const;
+        cell::card *findUpperCard(const cell::card *c) const;
 
         static cell::card *selectCard(cell::card &card);
         cell::card *selectCard(const sf::Vector2f &coords);
 
-        bool isFreeColomn(const sf::Vector2i &pos);
+        bool isFreeColomn(const sf::Vector2f &pos);
+
+        int availableSpace();
+
+        card * canPowerMove(const card *c, const sf::Vector2i &pos);
+        bool powerMove(card *c, card *topCard, const sf::Vector2i &pos);
     };
 }
 

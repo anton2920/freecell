@@ -1,37 +1,36 @@
 #include "endgame.hpp"
 #include "safehouse.hpp"
 
-void cell::endgame::put(card &c, const sf::Vector2i &pos) {
+void cell::endgame::put(card *c, const sf::Vector2i &pos) {
 
     /* Initializing variables */
     int whichOne = (pos.x - endgame_x_offset) / cell::card::card_w;
     sf::Vector2f coords;
 
     /* Main part */
-    c.setPos(cell::card::POSITION::endgame);
-    coords.x = cell::safehouse::safehouse_x + endgame_x_offset + cell::card::card_w * whichOne;
-    coords.y = cell::safehouse::safehouse_y;
-    c.setCoords(coords);
-    c.setSt(cell::card::STATE::unpressed);
+    if (whichOne < 4) {
+        c->setPos(cell::card::POSITION::endgame);
+        coords.x = cell::safehouse::safehouse_x + endgame_x_offset + cell::card::card_w * whichOne;
+        coords.y = cell::safehouse::safehouse_y;
+        c->setCoords(coords);
+        c->setSt(cell::card::STATE::unpressed);
 
-    ++this->counter;
-    this->house[whichOne].push(c);
-    this->emptyFlags[whichOne] = false;
+        ++this->counter;
+        this->house[whichOne].push(*c);
+        this->emptyFlags[whichOne] = false;
+    }
 }
 
-cell::card cell::endgame::get(const sf::Vector2f &pos) {
+void cell::endgame::get(const sf::Vector2f &pos) {
 
     /* Initializing variables */
-    int whichOne = (pos.x - endgame_x_offset) / cell::card::card_w;
-    cell::card c;
+    int whichOne = (static_cast<int>(pos.x) - endgame_x_offset) / cell::card::card_w;
 
     /* Main part */
     if (this->emptyFlags[whichOne]) {
         this->emptyFlags[whichOne] = true;
-        c = this->house[whichOne].top();
         this->house[whichOne].pop();
         --this->counter;
-        return c;
     }
 }
 

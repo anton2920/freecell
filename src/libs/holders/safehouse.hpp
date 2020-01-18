@@ -18,8 +18,8 @@ namespace cell {
         explicit safehouse(sf::RenderWindow *window) : placeholder(window) {};
         ~safehouse() = default;
 
-        void put(card &c, const sf::Vector2i &pos) override;
-        card get(const sf::Vector2f &pos) override;
+        void put(card *c, const sf::Vector2i &pos) override;
+        void get(const sf::Vector2f &pos) override;
 
         bool isInArea(const sf::Vector2i &pos) override;
         bool canPut(const sf::Vector2i &pos) override;

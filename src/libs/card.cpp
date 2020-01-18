@@ -117,7 +117,7 @@ bool cell::card::canMoveEndgame(cell::card &other) {
             (this->type.second == other.type.second);
 }
 
-void cell::card::moveToFreePos(const sf::Vector2i &p) {
+void cell::card::moveToFreePos(const sf::Vector2i &pip) {
 
     /* Initializing variables */
     sf::Vector2f findCoords;
@@ -126,11 +126,22 @@ void cell::card::moveToFreePos(const sf::Vector2i &p) {
 
     /* Main part */
     for (int i = 0; i < 8; ++i) {
-        if (p.x >= findCoords.x && p.x <= findCoords.x + cell::card::card_w) {
+        if (pip.x >= findCoords.x && pip.x <= findCoords.x + cell::card::card_w) {
             this->setCoords(findCoords);
             break;
         }
 
         findCoords.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
     }
+}
+
+std::ostream &cell::operator<<(std::ostream &stream, const cell::card &c) {
+
+    /* I/O flow */
+    stream << "{ { " << static_cast<int>(c.type.first) << ", " << static_cast<int>(c.type.second) << " }, " <<
+           "{ " << c.coords.x << ", " << c.coords.y << " }, " <<
+           static_cast<int>(c.p) << ", " << static_cast<int>(c.st) << " }";
+
+    /* Returning value */
+    return stream;
 }

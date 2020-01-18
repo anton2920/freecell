@@ -79,9 +79,12 @@ namespace cell {
         bool canMoveEndgame(card &other);
 
         bool move(card &other);
-        void moveToFreePos(const sf::Vector2i &p);
+
+        void moveToFreePos(const sf::Vector2i &pip);
 
         [[nodiscard]] static bool compCoords(const card &self, const card &other);
+
+        friend std::ostream &operator<<(std::ostream &stream, const cell::card &c);
     };
 }
 

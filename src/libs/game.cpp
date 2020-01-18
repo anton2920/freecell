@@ -3,13 +3,15 @@
 #include <ctime>
 #include <array>
 
+#include <iostream> // Starting to debug (tnx to Ilya)
+
 #include "game.hpp"
 
 int cell::game::exec() {
 
     /* Initializing variables */
     sf::Vector2i mouseCoords;
-    cell::card *selectedCard = nullptr;
+    cell::card *selectedCard = nullptr, *topCard = nullptr;
     bool sorted = true;
 
     /* Main part */
@@ -37,13 +39,14 @@ int cell::game::exec() {
             cell::card *c;
             if ((c = this->findBottomCard(sf::Vector2f(mouseCoords.x, mouseCoords.y))) != nullptr &&
                     c->getPos() != cell::card::POSITION::endgame && c->getPos() != cell::card::POSITION::safehouse) {
-                if (selectedCard->canMove(*c)) {
+                if (selectedCard->canMove(*c) || (topCard = this->canPowerMove(selectedCard,
+                                                                              sf::Vector2i(mouseCoords.x, mouseCoords.y))) != nullptr) {
                     this->window->setMouseCursorVisible(false);
                     this->draw->drawCursor(cell::game::drawSystem::down);
                 }
             } else if (this->sh->canPut(sf::Vector2i(mouseCoords.x, mouseCoords.y)) ||
                     this->eg->canPut(*selectedCard, sf::Vector2i(mouseCoords.x, mouseCoords.y)) ||
-                    this->isFreeColomn(sf::Vector2i(mouseCoords.x, mouseCoords.y))) {
+                    this->isFreeColomn(sf::Vector2f(mouseCoords.x, mouseCoords.y))) {
                 this->window->setMouseCursorVisible(false);
                 this->draw->drawCursor(cell::game::drawSystem::up);
             }
@@ -63,6 +66,7 @@ int cell::game::exec() {
                             if ((c = this->findBottomCard(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) !=
                                 nullptr &&
                                 c->getPos() != cell::card::POSITION::endgame) {
+                                std::clog << *c << std::endl << std::flush;
                                 if (selectedCard == nullptr) {
                                     selectedCard = c;
                                     cell::game::selectCard(*c);
@@ -77,39 +81,44 @@ int cell::game::exec() {
                                             sorted = false;
                                             cell::game::selectCard(*selectedCard);
                                             selectedCard = nullptr;
+                                        } else if (topCard != nullptr) {
+                                            this->powerMove(selectedCard, topCard, sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+                                            sorted = false;
+                                            cell::game::selectCard(*selectedCard);
+                                            selectedCard = nullptr;
                                         }
                                     } else {
                                         cell::game::selectCard(*selectedCard);
                                         selectedCard = nullptr;
                                     }
                                 }
-                            } else if (selectedCard != nullptr) {
+                            } else if (selectedCard != nullptr) { // not tabled card on another tabled card situations...
                                 if (this->sh->canPut(sf::Vector2i(event.mouseButton.x, event.mouseButton.y))) {
                                     if (selectedCard->getPos() == cell::card::POSITION::safehouse) {
                                         this->sh->get(selectedCard->getCoords());
-                                        selectedCard->setPos(cell::card::POSITION::tabled);
                                     }
-                                    this->sh->put(*selectedCard, sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
-                                    sorted = false;
                                     cell::game::selectCard(*selectedCard);
+                                    selectedCard->setPos(cell::card::POSITION::safehouse);
+                                    this->sh->put(selectedCard, sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+                                    sorted = false;
                                     selectedCard = nullptr;
                                 } else if (this->eg->canPut(*selectedCard,sf::Vector2i(event.mouseButton.x, event.mouseButton.y))) {
                                     if (selectedCard->getPos() == cell::card::POSITION::safehouse) {
                                         this->sh->get(selectedCard->getCoords());
-                                        selectedCard->setPos(cell::card::POSITION::tabled);
                                     }
-                                    this->eg->put(*selectedCard, sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
-                                    sorted = false;
                                     cell::game::selectCard(*selectedCard);
+                                    selectedCard->setPos(cell::card::POSITION::endgame);
+                                    this->eg->put(selectedCard, sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+                                    sorted = false;
                                     selectedCard = nullptr;
-                                } else if (this->isFreeColomn(sf::Vector2i(event.mouseButton.x, event.mouseButton.y))) {
+                                } else if (this->isFreeColomn(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
                                     if (selectedCard->getPos() == cell::card::POSITION::safehouse) {
                                         this->sh->get(selectedCard->getCoords());
                                         selectedCard->setPos(cell::card::POSITION::tabled);
                                     }
+                                    cell::game::selectCard(*selectedCard);
                                     selectedCard->moveToFreePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
                                     sorted = false;
-                                    cell::game::selectCard(*selectedCard);
                                     selectedCard = nullptr;
                                 }
                             }
@@ -236,6 +245,7 @@ cell::card *cell::game::findBottomCard(const sf::Vector2f &coords) const {
     /* Main part */
     if (c != nullptr) {
         newCoords = c->getCoords();
+        newCoords.x += 5;
         while (true) {
             newCoords.y += cell::game::drawSystem::card_row_space;
             if ((next_c = this->findCard(newCoords)) != nullptr) {
@@ -249,6 +259,27 @@ cell::card *cell::game::findBottomCard(const sf::Vector2f &coords) const {
     /* Returning value */
     return c;
 }
+
+cell::card *cell::game::findLowerCard(const cell::card *c) const {
+
+    /* Initializing variables */
+    sf::Vector2f findCoords = c->getCoords();
+    findCoords.y += cell::game::drawSystem::card_row_overlap_space;
+
+    /* Returning value */
+    return this->findCard(findCoords);
+}
+
+cell::card *cell::game::findUpperCard(const cell::card *c) const {
+
+    /* Initializing variables */
+    sf::Vector2f findCoords = c->getCoords();
+    findCoords.y -= cell::game::drawSystem::card_row_overlap_space;
+
+    /* Returning value */
+    return this->findCard(findCoords);
+}
+
 
 cell::card *cell::game::selectCard(cell::card &card) {
 
@@ -277,7 +308,7 @@ cell::card *cell::game::selectCard(const sf::Vector2f &coords) {
     return c;
 }
 
-bool cell::game::isFreeColomn(const sf::Vector2i &pos) {
+bool cell::game::isFreeColomn(const sf::Vector2f &pos) {
 
     /* Initializing variables */
     sf::Vector2f findCoords;
@@ -297,4 +328,100 @@ bool cell::game::isFreeColomn(const sf::Vector2i &pos) {
 
     /* Returning value */
     return false;
+}
+
+cell::card *cell::game::canPowerMove(const card *c, const sf::Vector2i &pos) {
+
+    /* Initializing variables */
+    sf::Vector2f toCoords;
+    toCoords.x = pos.x;
+    toCoords.y = pos.y;
+    cell::card *findCard = const_cast<card *>(c), *prevCard = nullptr, *toCard = this->findBottomCard(toCoords);
+
+    /* Main part */
+    if (toCard != nullptr) {
+        for (int i = 0; i < this->availableSpace(); ++i) {
+            prevCard = findCard;
+            findCard = this->findUpperCard(prevCard);
+            if (findCard == nullptr) {
+                break;
+            }
+            if (!prevCard->canMove(*findCard) || prevCard->canMove(*toCard)) {
+                break;
+            }
+        }
+        findCard = prevCard;
+        if (findCard != nullptr) {
+            if (!findCard->canMove(*toCard)) {
+                return nullptr;
+            }
+        }
+    } else {
+        for (int i = 0; i < this->availableSpace(); ++i) {
+            prevCard = findCard;
+            findCard = this->findUpperCard(prevCard);
+            if (findCard == nullptr) {
+                return nullptr;
+            }
+            if (!prevCard->canMove(*findCard)) {
+                break;
+            }
+        }
+    }
+
+    /* Returning value */
+    return findCard;
+}
+
+int cell::game::availableSpace() {
+
+    /* Initializing variables */
+    sf::Vector2f c(cell::game::drawSystem::card_row_x, cell::game::drawSystem::card_row_y);
+    int n = 0, m = 0, pow = 1;
+
+    /* Main part */
+    for (int i = 0; i < 4; ++i) {
+        if (this->sh->isEmpty(i)) {
+            ++n;
+        }
+    }
+
+    for (int i = 0; i < 8; ++i) {
+        if (this->isFreeColomn(c)) {
+            ++m;
+        }
+        c.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
+    }
+
+    for (int i = 0; i < m; ++i) {
+        pow *= 2;
+    }
+
+    /* Returning value */
+    return (n + 1) * pow;
+}
+
+bool cell::game::powerMove(cell::card *c, cell::card *topCard, const sf::Vector2i &pos) {
+
+    /* Initializing variables */
+    sf::Vector2f toCoords, prevCoords = topCard->getCoords();
+    toCoords.x = pos.x;
+    toCoords.y = pos.y;
+    cell::card *toCard = this->findBottomCard(toCoords);
+
+    if (this->isFreeColomn(toCoords)) {
+
+    } else {
+        while (topCard != c) {
+            topCard->move(*toCard);
+            toCard = topCard;
+            prevCoords.y += cell::game::drawSystem::card_row_overlap_space;
+            topCard = findCard(prevCoords);
+        }
+
+        topCard->move(*toCard);
+    }
+
+    /* Returning value */
+    return true;
 }

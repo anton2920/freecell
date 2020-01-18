@@ -18,8 +18,8 @@ namespace cell {
         explicit endgame(sf::RenderWindow *window) : placeholder(window) {};
         ~endgame() = default;
 
-        void put(card &c, const sf::Vector2i &pos) override;
-        card get(const sf::Vector2f &pos) override;
+        void put(card *c, const sf::Vector2i &pos) override;
+        void get(const sf::Vector2f &pos) override;
 
         [[nodiscard]] const std::array<std::stack<card>, 4> &getHouse() const;
 
