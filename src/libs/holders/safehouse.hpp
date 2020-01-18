@@ -23,6 +23,8 @@ namespace cell {
 
         bool isInArea(const sf::Vector2i &pos) override;
         bool canPut(const sf::Vector2i &pos) override;
+
+        void copyFrom(const safehouse *other);
     };
 }
 

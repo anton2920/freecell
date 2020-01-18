@@ -117,7 +117,7 @@ bool cell::card::canMoveEndgame(cell::card &other) {
             (this->type.second == other.type.second);
 }
 
-void cell::card::moveToFreePos(const sf::Vector2i &pip) {
+void cell::card::moveToFreePos(const sf::Vector2f &pip) {
 
     /* Initializing variables */
     sf::Vector2f findCoords;

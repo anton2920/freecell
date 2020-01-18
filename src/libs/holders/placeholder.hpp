@@ -21,6 +21,8 @@ namespace cell {
 
         virtual bool isInArea(const sf::Vector2i &pos) = 0;
         virtual bool canPut(const sf::Vector2i &pos) = 0;
+
+//        virtual void copyFrom(const placeholder *other) = 0;
     };
 }
 

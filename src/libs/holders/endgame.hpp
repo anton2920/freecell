@@ -28,6 +28,8 @@ namespace cell {
         bool isInArea(const sf::Vector2i &pos) override;
         bool canPut(const sf::Vector2i &pos) override;
         bool canPut(card &c, const sf::Vector2i &pos);
+
+        void copyFrom(const endgame *other);
     };
 }
 

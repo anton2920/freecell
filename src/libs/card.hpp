@@ -80,7 +80,7 @@ namespace cell {
 
         bool move(card &other);
 
-        void moveToFreePos(const sf::Vector2i &pip);
+        void moveToFreePos(const sf::Vector2f &pip);
 
         [[nodiscard]] static bool compCoords(const card &self, const card &other);
 

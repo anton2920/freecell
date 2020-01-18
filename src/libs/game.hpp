@@ -4,6 +4,7 @@
 #include <deque>
 #include <cstdint>
 #include <SFML/Graphics.hpp>
+//#include <TGUI/TGUI.hpp>
 
 #include "card.hpp"
 #include "holders/safehouse.hpp"
@@ -101,6 +102,24 @@ namespace cell {
             void drawMan(GAMESTATE st);
             void drawCursor(cursor_type t);
         };
+
+        struct fieldState {
+            std::deque<card> table{};
+            safehouse *sh;
+            endgame *eg;
+
+            bool isUndoAvailable;
+
+            explicit fieldState(sf::RenderWindow *window) {
+                this->sh = new cell::safehouse(window);
+                this->eg = new cell::endgame(window);
+                isUndoAvailable = false;
+            }
+            ~fieldState() {
+                delete(sh);
+                delete(eg);
+            }
+        };
     private:
         GAMESTATE state = GAMESTATE::start;
         std::deque<card> table{};
@@ -114,9 +133,17 @@ namespace cell {
         safehouse *sh;
         endgame *eg;
 
+        fieldState *fs;
+
         enum gameWindow {
             window_w = 632,
             window_h = 446
+        };
+
+        enum powerMoveAnswer {
+            one = 1,
+            stack = 2,
+            cancel = 3
         };
 
         const char *TITLE = "FreeCell";
@@ -142,7 +169,11 @@ namespace cell {
         int availableSpace();
 
         card * canPowerMove(const card *c, const sf::Vector2i &pos);
+        static powerMoveAnswer askForPowerMove();
         bool powerMove(card *c, card *topCard, const sf::Vector2i &pos);
+
+        void saveState();
+        void loadState();
     };
 }
 

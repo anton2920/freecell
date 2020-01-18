@@ -43,3 +43,11 @@ bool cell::safehouse::canPut(const sf::Vector2i &pos) {
     /* Returning value */
     return isInArea(pos) && this->emptyFlags[whichOne];
 }
+
+void cell::safehouse::copyFrom(const cell::safehouse *other) {
+
+    /* Main part */
+    std::copy(other->house.begin(), other->house.end(), this->house.begin());
+    std::copy(other->emptyFlags.begin(), other->emptyFlags.end(), this->emptyFlags.begin());
+    this->window = other->window;
+}

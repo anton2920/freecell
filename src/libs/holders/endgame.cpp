@@ -80,3 +80,12 @@ bool cell::endgame::canPut(card &c, const sf::Vector2i &pos) {
     /* Returning value */
     return false;
 }
+
+void cell::endgame::copyFrom(const cell::endgame *other) {
+
+    /* Main part */
+    std::copy(other->house.begin(), other->house.end(), this->house.begin());
+    std::copy(other->emptyFlags.begin(), other->emptyFlags.end(), this->emptyFlags.begin());
+    this->window = other->window;
+    this->counter = other->counter;
+}

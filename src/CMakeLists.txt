@@ -12,4 +12,4 @@ set(ENDGAME libs/holders/endgame.cpp libs/holders/endgame.hpp)
 
 add_executable(src main.cpp ${GAME} ${CARD} ${STATS} ${PLACEHOLDER} ${SAFEHOUSE} ${ENDGAME})
 
-target_link_libraries(src sfml-system sfml-window sfml-graphics)
+target_link_libraries(src sfml-system sfml-window sfml-graphics tgui)
