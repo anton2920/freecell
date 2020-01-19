@@ -1,9 +1,8 @@
 #include "safehouse.hpp"
 
-void cell::safehouse::put(card *c, const sf::Vector2i &pos) {
+void cell::safehouse::put(cell::card *c, int whichOne) {
 
     /* Initializing variables */
-    int whichOne = pos.x / cell::card::card_w;
     sf::Vector2f coords;
 
     /* Main part */
@@ -16,6 +15,12 @@ void cell::safehouse::put(card *c, const sf::Vector2i &pos) {
         this->emptyFlags[whichOne] = false;
         this->house[whichOne] = c;
     }
+}
+
+void cell::safehouse::put(card *c, const sf::Vector2i &pos) {
+
+    /* Main part */
+    this->put(c, pos.x / cell::card::card_w);
 }
 
 void cell::safehouse::get(const sf::Vector2f &pos) {
@@ -50,4 +55,11 @@ void cell::safehouse::copyFrom(const cell::safehouse *other) {
     std::copy(other->house.begin(), other->house.end(), this->house.begin());
     std::copy(other->emptyFlags.begin(), other->emptyFlags.end(), this->emptyFlags.begin());
     this->window = other->window;
+}
+
+void cell::safehouse::clear() {
+
+    /* Main part */
+    this->house = {nullptr, nullptr, nullptr, nullptr};
+    this->emptyFlags = {true, true, true, true};
 }

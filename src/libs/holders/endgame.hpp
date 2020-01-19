@@ -19,17 +19,21 @@ namespace cell {
         ~endgame() = default;
 
         void put(card *c, const sf::Vector2i &pos) override;
+        void put(card *c, int whichOne) override;
         void get(const sf::Vector2f &pos) override;
 
         [[nodiscard]] const std::array<std::stack<card>, 4> &getHouse() const;
 
         bool isEndgame();
+        int getLeft();
 
         bool isInArea(const sf::Vector2i &pos) override;
         bool canPut(const sf::Vector2i &pos) override;
         bool canPut(card &c, const sf::Vector2i &pos);
 
         void copyFrom(const endgame *other);
+
+        void clear() override;
     };
 }
 

@@ -37,8 +37,19 @@ CMakeFiles/src.dir/libs/holders/safehouse.cpp.o: ../libs/holders/placeholder.hpp
 CMakeFiles/src.dir/libs/holders/safehouse.cpp.o: ../libs/holders/safehouse.cpp
 CMakeFiles/src.dir/libs/holders/safehouse.cpp.o: ../libs/holders/safehouse.hpp
 
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/card.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/game.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/holders/endgame.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/holders/placeholder.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/holders/safehouse.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/menu.cpp
+
+CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/card.hpp
+CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/game.hpp
+CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/holders/endgame.hpp
+CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/holders/placeholder.hpp
+CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/holders/safehouse.hpp
 CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/stats.cpp
-CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/stats.hpp
 
 CMakeFiles/src.dir/main.cpp.o: ../libs/card.hpp
 CMakeFiles/src.dir/main.cpp.o: ../libs/game.hpp

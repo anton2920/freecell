@@ -19,12 +19,15 @@ namespace cell {
         ~safehouse() = default;
 
         void put(card *c, const sf::Vector2i &pos) override;
+        void put(card *c, int whichOne) override;
         void get(const sf::Vector2f &pos) override;
 
         bool isInArea(const sf::Vector2i &pos) override;
         bool canPut(const sf::Vector2i &pos) override;
 
         void copyFrom(const safehouse *other);
+
+        void clear() override;
     };
 }
 

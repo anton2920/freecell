@@ -11,23 +11,25 @@ int cell::game::exec() {
 
     /* Initializing variables */
     sf::Vector2i mouseCoords;
-    cell::card *selectedCard = nullptr, *topCard = nullptr;
+    cell::card *topCard = nullptr;
     bool sorted = true;
 
     /* Main part */
-    // window.show();
     while (this->window->isOpen()) {
         mouseCoords = sf::Mouse::getPosition(*this->window);
 
         this->draw->drawField();
-        if (this->eg->isEndgame()) {
+        if (this->eg->isEndgame() && this->state != cell::game::GAMESTATE::win) {
             this->stop();
         }
         this->draw->drawMan(this->state);
         if (this->state == cell::game::GAMESTATE::game) {
             if (!sorted) {
+                while (this->tryAutoPlay())
+                    ;
                 std::stable_sort(this->table.begin(), this->table.end(), cell::card::compCoords);
                 sorted = true;
+                this->m->cardsLeftLabel(this->eg->getLeft());
             }
             this->draw->drawCards(this->table);
         }
@@ -41,27 +43,39 @@ int cell::game::exec() {
                     c->getPos() != cell::card::POSITION::endgame && c->getPos() != cell::card::POSITION::safehouse) {
                 if (selectedCard->canMove(*c) || (topCard = this->canPowerMove(selectedCard,
                                                                               sf::Vector2i(mouseCoords.x, mouseCoords.y))) != nullptr) {
-                    this->window->setMouseCursorVisible(false);
                     this->draw->drawCursor(cell::game::drawSystem::down);
+                    this->window->setMouseCursorVisible(false);
                 }
             } else if (this->sh->canPut(sf::Vector2i(mouseCoords.x, mouseCoords.y)) ||
                     this->eg->canPut(*selectedCard, sf::Vector2i(mouseCoords.x, mouseCoords.y))) {
-                this->window->setMouseCursorVisible(false);
                 this->draw->drawCursor(cell::game::drawSystem::up);
+                this->window->setMouseCursorVisible(false);
             } else if (this->isFreeColomn(sf::Vector2f(mouseCoords.x, mouseCoords.y))) {
                 topCard = this->canPowerMove(selectedCard,sf::Vector2i(mouseCoords.x, mouseCoords.y));
-                this->window->setMouseCursorVisible(false);
                 this->draw->drawCursor(cell::game::drawSystem::up);
+                this->window->setMouseCursorVisible(false);
+            } else {
+                this->window->setMouseCursorVisible(true);
             }
 
+        } else {
             this->window->setMouseCursorVisible(true);
         }
 
         sf::Event event{};
         while (this->window->pollEvent(event)) {
+            if (this->m->getGui()->handleEvent(event)) {
+                continue;
+            }
             switch (event.type) {
                 case sf::Event::Closed:
-                    this->window->close();
+                    if (this->state == cell::game::GAMESTATE::game) {
+                        if (this->m->wantToResign(this)) {
+                            this->window->close();
+                        }
+                    } else {
+                        this->window->close();
+                    }
                     break;
                 case sf::Event::MouseButtonPressed:
                     if (event.mouseButton.button == sf::Mouse::Left) {
@@ -70,7 +84,7 @@ int cell::game::exec() {
                             if ((c = this->findBottomCard(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) !=
                                 nullptr &&
                                 c->getPos() != cell::card::POSITION::endgame) {
-                                std::clog << *c << std::endl << std::flush;
+//                                std::clog << *c << std::endl << std::flush;
                                 if (selectedCard == nullptr) {
                                     selectedCard = c;
                                     cell::game::selectCard(*c);
@@ -163,11 +177,27 @@ int cell::game::exec() {
                 case sf::Event::MouseMoved:
                     break;
                 case sf::Event::KeyPressed:
-                    if (event.key.code == sf::Keyboard::Space && this->state == cell::game::GAMESTATE::start) {
-                        this->start(26614);
-                        cell::game::drawSystem::initCards(this->table);
-                    } else if (event.key.code == sf::Keyboard::F10) {
-                        this->loadState();
+                    switch (event.key.code) {
+                        case sf::Keyboard::F2:
+                            this->start();
+                            break;
+                        case sf::Keyboard::F3:
+                            this->selectGame();
+                            break;
+                        case sf::Keyboard::F5:
+//                            this->m->showStats(stats);
+                            break;
+                        case sf::Keyboard::F10:
+                            if (this->state != cell::game::GAMESTATE::win) {
+                                this->loadState();
+                            }
+                            break;
+                        case sf::Keyboard::W:
+                            if (!std::system(R"(zenity --question --no-wrap --title="Cheating?" --text="Do you want to win?" --ok-label Yes --cancel-label No)")) {
+                                this->stop();
+                            }
+                        default:
+                            break;
                     }
                     break;
                 default:
@@ -175,6 +205,7 @@ int cell::game::exec() {
             }
         }
 
+        this->m->getGui()->draw();
         this->window->display();
     }
 
@@ -188,12 +219,19 @@ cell::game::game() {
 
     /* Initializing variables */
     // Creating window and other sh**t...
-    this->window = new sf::RenderWindow(sf::VideoMode(632, 446), TITLE, sf::Style::Titlebar | sf::Style::Close);
+    this->window = new sf::RenderWindow(sf::VideoMode(window_w, window_h),
+            TITLE, sf::Style::Titlebar | sf::Style::Close);
+    /*auto winSize = sf::VideoMode::getDesktopMode();
+    this->window->setPosition(sf::Vector2i(winSize.width / 2 - this->window->getSize().x / 2,
+            winSize.height / 2 - this->window->getSize().y / 2));*/
     this->window->setVerticalSyncEnabled(true);
     this->draw = new cell::game::drawSystem(this->window);
     this->sh = new cell::safehouse(this->window);
     this->eg = new cell::endgame(this->window);
     this->fs = new cell::game::fieldState(this->window);
+    this->m = new cell::game::menu(this);
+    this->m->cardsLeftLabel();
+    this->stats = new cell::game::statistics();
 }
 
 cell::game::~game() {
@@ -203,24 +241,68 @@ cell::game::~game() {
     delete(draw);
     delete(sh);
     delete(eg);
+    delete(fs);
+    delete(m);
+    delete(stats);
 }
 
-void cell::game::start(int n) {
+void cell::game::start(long n) {
 
     /* Initializing variables */
+    if (this->state == cell::game::GAMESTATE::game) {
+        if (this->m->wantToResign(this)) {
+            this->clearGame();
+        } else {
+            return;
+        }
+    } else {
+        this->clearGame();
+    }
     this->state = cell::game::GAMESTATE::game;
     std::srand(std::time(nullptr));
-    this->r.srand(((n != -1) ? n : std::rand()));
-    this->window->setTitle(std::string(TITLE) + std::string(" #") + std::to_string(n));
+    static unsigned value = 1;
+    if (n != -2) {
+        value = (n != -1) ? n : std::rand() % 1000001;
+    }
+    this->r.srand(value);
+    this->window->setTitle(sf::String(TITLE) + sf::String(" Game ") + sf::String("#") + std::to_string(value));
 
     /* Main part */
     this->deal();
+    this->m->setRestartEnabled(true);
+    this->m->cardsLeftLabel(this->eg->getLeft());
+    cell::game::drawSystem::initCards(this->table);
+}
+
+void cell::game::clearGame() {
+
+    /* Main part */
+    this->table.clear();
+    this->sh->clear();
+    this->eg->clear();
+    this->selectedCard = nullptr;
+    this->m->setUndoEnabled(false);
 }
 
 void cell::game::stop() {
 
     /* Initializing variables */
     this->state = cell::game::GAMESTATE::win;
+    this->stats->gameWin();
+    this->draw->drawMan(this->state);
+    this->window->display();
+    this->m->setUndoEnabled(false);
+
+    switch (this->m->startNewGame(this)) {
+        case menu::newRandom:
+            this->start();
+            break;
+        case menu::newSelect:
+            this->selectGame();
+            break;
+        case menu::newCancel:
+            break;
+    }
 }
 
 void cell::game::deal() {
@@ -288,20 +370,6 @@ cell::card *cell::game::findBottomCard(const sf::Vector2f &coords) const {
     return c;
 }
 
-cell::card *cell::game::findLowerCard(const cell::card *c) const {
-
-    /* Initializing variables */
-    cell::card *ca;
-
-    /* Initializing variables */
-    sf::Vector2f findCoords = c->getCoords();
-    findCoords.y += cell::game::drawSystem::card_row_overlap_space;
-    ca = this->findCard(findCoords);
-
-    /* Returning value */
-    return (c->getPos() != cell::card::POSITION::tabled) ? nullptr : ca;
-}
-
 cell::card *cell::game::findUpperCard(const cell::card *c) const {
 
     /* Initializing variables */
@@ -328,20 +396,6 @@ cell::card *cell::game::selectCard(cell::card &card) {
 
     /* Returning value */
     return &card;
-}
-
-cell::card *cell::game::selectCard(const sf::Vector2f &coords) {
-
-    /* Initializing variables */
-    cell::card *c = this->findBottomCard(coords);
-
-    /* Main part */
-    if (c != nullptr) {
-        cell::game::selectCard(*c);
-    }
-
-    /* Returning value */
-    return c;
 }
 
 bool cell::game::isFreeColomn(const sf::Vector2f &pos) {
@@ -400,11 +454,10 @@ cell::card *cell::game::canPowerMove(const card *c, const sf::Vector2i &pos) {
                 break;
             }
             if (!prevCard->canMove(*findCard)) {
-                findCard = prevCard;
                 break;
             }
         }
-
+        findCard = prevCard;
         if (findCard == c) {
             return nullptr;
         }
@@ -418,7 +471,7 @@ int cell::game::availableSpace() {
 
     /* Initializing variables */
     sf::Vector2f c(cell::game::drawSystem::card_row_x, cell::game::drawSystem::card_row_y);
-    int n = 0, m = 0, pow = 1;
+    int n = 0, col = 0, pow = 1;
 
     /* Main part */
     for (int i = 0; i < 4; ++i) {
@@ -429,12 +482,12 @@ int cell::game::availableSpace() {
 
     for (int i = 0; i < 8; ++i) {
         if (this->isFreeColomn(c)) {
-            ++m;
+            ++col;
         }
         c.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
     }
 
-    for (int i = 0; i < m; ++i) {
+    for (int i = 0; i < col; ++i) {
         pow *= 2;
     }
 
@@ -482,18 +535,19 @@ bool cell::game::powerMove(cell::card *c, cell::card *topCard, const sf::Vector2
 cell::game::powerMoveAnswer cell::game::askForPowerMove() {
 
     /* Initializing variables */
-    int ans;
+    /*int ans;*/
 
     /* I/O flow */
-    std::cout << "You are performing move to the free table space. Available options: " <<
+    /*std::cout << "You are performing move to the free table space. Available options: " <<
         "\n\t1) Move a single card" <<
         "\n\t2) Perform a POWERMOVE!" <<
         "\n\t3) Cancel" <<
         "\n\nAnswer: ";
-    std::cin >> ans;
+    std::cin >> ans;*/
 
     /* Returning value */
-    return static_cast<cell::game::powerMoveAnswer>(ans);
+    /*return static_cast<cell::game::powerMoveAnswer>(ans);*/
+    return this->m->askForPowerMove(this);
 }
 
 void cell::game::saveState() {
@@ -507,6 +561,7 @@ void cell::game::saveState() {
     this->fs->eg->copyFrom(this->eg);
 
     this->fs->isUndoAvailable = true;
+    this->m->setUndoEnabled(true);
 }
 
 void cell::game::loadState() {
@@ -524,5 +579,125 @@ void cell::game::loadState() {
         this->eg->copyFrom(this->fs->eg);
 
         this->fs->isUndoAvailable = false;
+        this->m->setUndoEnabled(false);
+
+        this->selectedCard = nullptr;
+    }
+}
+
+bool cell::game::generateBottomCardsList(std::vector<card *> &dest) {
+
+    /* Initializing variables */
+    sf::Vector2f coords(cell::game::drawSystem::card_row_x, cell::game::drawSystem::card_row_y);
+    cell::card *findCard = this->findBottomCard(coords);
+    int counter = 0;
+
+    /* Main part */
+    dest.push_back(findCard);
+    for (int i = 0; i < 7; ++i) {
+        if (findCard != nullptr) {
+            ++counter;
+        }
+        coords.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
+        findCard = this->findBottomCard(coords);
+        dest.push_back(findCard);
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        if (!this->sh->isEmpty(i)) {
+            dest.push_back(this->findCard(sf::Vector2f(cell::safehouse::safehouse_x + cell::card::card_w * i, cell::safehouse::safehouse_y)));
+            ++counter;
+        }
+    }
+
+    /* Returning value */
+    return (counter == 1);
+}
+
+bool cell::game::tryAutoPlay() {
+
+    /* Initializing variables */
+    std::vector<card *> l1;
+    bool useless = false, isMoved = false;
+
+    /* Main part */
+    if (this->generateBottomCardsList(l1)) {
+        useless = true;
+    }
+    for (auto &i : l1) {
+        if (i == nullptr) {
+            continue;
+        }
+        if (i->getPos() == cell::card::POSITION::endgame) {
+            continue;
+        } else if (i->getType().first == cell::card::VALUE::ace || i->getType().first == cell::card::VALUE::two) {
+            useless = true;
+        }
+        if (!useless) {
+            for (auto &j : this->table) {
+                if (j.getPos() == cell::card::POSITION::endgame || *i == j) {
+                    continue;
+                }
+                if (j.canMove(*i)) {
+                    useless = false;
+                    break;
+                } else {
+                    useless = true;
+                }
+            }
+        }
+        if (useless) {
+            for (int j = 0; j < 4; ++j) {
+                if (this->eg->isEmpty(j)) {
+                    if (i->getType().first == cell::card::VALUE::ace) {
+                        if (i->getPos() == cell::card::POSITION::safehouse) {
+                            this->sh->get(i->getCoords());
+                        }
+                        this->eg->put(i, j);
+                        isMoved = true;
+                    }
+                    break;
+                } else if (i->canMoveEndgame(const_cast<card &>(this->eg->getHouse()[j].top()))) {
+                    if (i->getPos() == cell::card::POSITION::safehouse) {
+                        this->sh->get(i->getCoords());
+                    }
+                    this->eg->put(i, j);
+                    isMoved = true;
+                    break;
+                }
+            }
+            useless = false;
+        }
+    }
+
+    /* Returning value */
+    return isMoved;
+}
+
+void cell::game::selectGame() {
+
+    /* Initializing variables */
+    long gameNum;
+
+    /* Main part */
+    if (this->state == cell::game::GAMESTATE::game) {
+        if (this->m->wantToResign(this)) {
+            do {
+                gameNum = this->m->chooseGameNumber(this);
+                if (gameNum == -1) {
+                    return;
+                }
+            } while (gameNum < 1 || gameNum > 1000000);
+            this->state = cell::game::GAMESTATE::start;
+            this->start(gameNum);
+        }
+    } else {
+        do {
+            gameNum = this->m->chooseGameNumber(this);
+            if (gameNum == -1) {
+                return;
+            }
+        } while (gameNum < 1 || gameNum > 1000000);
+        this->start(gameNum);
     }
 }

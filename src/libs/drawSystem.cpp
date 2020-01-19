@@ -8,7 +8,7 @@ cell::game::drawSystem::drawSystem(sf::RenderWindow *window) {
     this->window = window;
 
     /* Main part */
-    if (!this->texture.loadFromFile("../files/assets.png")) {
+    if (!this->texture.loadFromFile(sf::String(cell::globalPath) + sf::String("assets.png"))) {
         std::cerr << "Couldn't load texture file!\n";
         return;
     }
@@ -21,6 +21,7 @@ void cell::game::drawSystem::drawField() {
 
     /* Initializing variables */
     sf::Sprite sprite(this->texture);
+    sprite.setPosition(field_x, field_y);
     sprite.setTextureRect(sf::IntRect(field_x, field_y, field_w, field_h));
 
     /* Main part */

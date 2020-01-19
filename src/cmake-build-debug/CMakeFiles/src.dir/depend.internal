@@ -37,9 +37,20 @@ CMakeFiles/src.dir/libs/holders/safehouse.cpp.o
  /home/anton/freecell/src/libs/holders/placeholder.hpp
  /home/anton/freecell/src/libs/holders/safehouse.cpp
  /home/anton/freecell/src/libs/holders/safehouse.hpp
+CMakeFiles/src.dir/libs/menu.cpp.o
+ /home/anton/freecell/src/libs/card.hpp
+ /home/anton/freecell/src/libs/game.hpp
+ /home/anton/freecell/src/libs/holders/endgame.hpp
+ /home/anton/freecell/src/libs/holders/placeholder.hpp
+ /home/anton/freecell/src/libs/holders/safehouse.hpp
+ /home/anton/freecell/src/libs/menu.cpp
 CMakeFiles/src.dir/libs/stats.cpp.o
+ /home/anton/freecell/src/libs/card.hpp
+ /home/anton/freecell/src/libs/game.hpp
+ /home/anton/freecell/src/libs/holders/endgame.hpp
+ /home/anton/freecell/src/libs/holders/placeholder.hpp
+ /home/anton/freecell/src/libs/holders/safehouse.hpp
  /home/anton/freecell/src/libs/stats.cpp
- /home/anton/freecell/src/libs/stats.hpp
 CMakeFiles/src.dir/main.cpp.o
  /home/anton/freecell/src/libs/card.hpp
  /home/anton/freecell/src/libs/game.hpp

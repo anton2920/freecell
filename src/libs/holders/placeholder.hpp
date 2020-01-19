@@ -17,12 +17,13 @@ namespace cell {
         bool isEmpty(int n = 0);
 
         virtual void put(card *c, const sf::Vector2i &pos) = 0;
+        virtual void put(card *c, int whichOne) = 0;
         virtual void get(const sf::Vector2f &pos) = 0;
 
         virtual bool isInArea(const sf::Vector2i &pos) = 0;
         virtual bool canPut(const sf::Vector2i &pos) = 0;
 
-//        virtual void copyFrom(const placeholder *other) = 0;
+        virtual void clear() = 0;
     };
 }
 

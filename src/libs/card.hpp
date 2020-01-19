@@ -61,6 +61,10 @@ namespace cell {
         card(const card &other);
         ~card() = default;
 
+        bool operator==(const card &other) {
+            return this->type == other.type;
+        }
+
         [[nodiscard]] const std::pair<VALUE, SUIT> &getType() const;
         [[nodiscard]] sf::Vector2f getCoords() const;
         [[nodiscard]] POSITION getPos() const;

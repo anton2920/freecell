@@ -117,10 +117,10 @@
 		<Unit filename="/home/anton/freecell/src/libs/holders/safehouse.hpp">
 			<Option target="src"/>
 		</Unit>
-		<Unit filename="/home/anton/freecell/src/libs/stats.cpp">
+		<Unit filename="/home/anton/freecell/src/libs/menu.cpp">
 			<Option target="src"/>
 		</Unit>
-		<Unit filename="/home/anton/freecell/src/libs/stats.hpp">
+		<Unit filename="/home/anton/freecell/src/libs/stats.cpp">
 			<Option target="src"/>
 		</Unit>
 		<Unit filename="/home/anton/freecell/src/main.cpp">

@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/src.dir/libs/holders/endgame.cpp.o"
   "CMakeFiles/src.dir/libs/holders/placeholder.cpp.o"
   "CMakeFiles/src.dir/libs/holders/safehouse.cpp.o"
+  "CMakeFiles/src.dir/libs/menu.cpp.o"
   "CMakeFiles/src.dir/libs/stats.cpp.o"
   "CMakeFiles/src.dir/main.cpp.o"
   "src"

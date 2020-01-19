@@ -96,18 +96,18 @@ CMakeFiles/src.dir/libs/drawSystem.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/libs/drawSystem.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anton/freecell/src/libs/drawSystem.cpp -o CMakeFiles/src.dir/libs/drawSystem.cpp.s
 
-CMakeFiles/src.dir/libs/card.cpp.o: CMakeFiles/src.dir/flags.make
-CMakeFiles/src.dir/libs/card.cpp.o: ../libs/card.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/src.dir/libs/card.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/card.cpp.o -c /home/anton/freecell/src/libs/card.cpp
+CMakeFiles/src.dir/libs/menu.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/libs/menu.cpp.o: ../libs/menu.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/src.dir/libs/menu.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/menu.cpp.o -c /home/anton/freecell/src/libs/menu.cpp
 
-CMakeFiles/src.dir/libs/card.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/libs/card.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anton/freecell/src/libs/card.cpp > CMakeFiles/src.dir/libs/card.cpp.i
+CMakeFiles/src.dir/libs/menu.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/libs/menu.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anton/freecell/src/libs/menu.cpp > CMakeFiles/src.dir/libs/menu.cpp.i
 
-CMakeFiles/src.dir/libs/card.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/libs/card.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anton/freecell/src/libs/card.cpp -o CMakeFiles/src.dir/libs/card.cpp.s
+CMakeFiles/src.dir/libs/menu.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/libs/menu.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anton/freecell/src/libs/menu.cpp -o CMakeFiles/src.dir/libs/menu.cpp.s
 
 CMakeFiles/src.dir/libs/stats.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/libs/stats.cpp.o: ../libs/stats.cpp
@@ -122,9 +122,22 @@ CMakeFiles/src.dir/libs/stats.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/libs/stats.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anton/freecell/src/libs/stats.cpp -o CMakeFiles/src.dir/libs/stats.cpp.s
 
+CMakeFiles/src.dir/libs/card.cpp.o: CMakeFiles/src.dir/flags.make
+CMakeFiles/src.dir/libs/card.cpp.o: ../libs/card.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/src.dir/libs/card.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/card.cpp.o -c /home/anton/freecell/src/libs/card.cpp
+
+CMakeFiles/src.dir/libs/card.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/src.dir/libs/card.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/anton/freecell/src/libs/card.cpp > CMakeFiles/src.dir/libs/card.cpp.i
+
+CMakeFiles/src.dir/libs/card.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/src.dir/libs/card.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/anton/freecell/src/libs/card.cpp -o CMakeFiles/src.dir/libs/card.cpp.s
+
 CMakeFiles/src.dir/libs/holders/placeholder.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/libs/holders/placeholder.cpp.o: ../libs/holders/placeholder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/src.dir/libs/holders/placeholder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/src.dir/libs/holders/placeholder.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/holders/placeholder.cpp.o -c /home/anton/freecell/src/libs/holders/placeholder.cpp
 
 CMakeFiles/src.dir/libs/holders/placeholder.cpp.i: cmake_force
@@ -137,7 +150,7 @@ CMakeFiles/src.dir/libs/holders/placeholder.cpp.s: cmake_force
 
 CMakeFiles/src.dir/libs/holders/safehouse.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/libs/holders/safehouse.cpp.o: ../libs/holders/safehouse.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/src.dir/libs/holders/safehouse.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/src.dir/libs/holders/safehouse.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/holders/safehouse.cpp.o -c /home/anton/freecell/src/libs/holders/safehouse.cpp
 
 CMakeFiles/src.dir/libs/holders/safehouse.cpp.i: cmake_force
@@ -150,7 +163,7 @@ CMakeFiles/src.dir/libs/holders/safehouse.cpp.s: cmake_force
 
 CMakeFiles/src.dir/libs/holders/endgame.cpp.o: CMakeFiles/src.dir/flags.make
 CMakeFiles/src.dir/libs/holders/endgame.cpp.o: ../libs/holders/endgame.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/src.dir/libs/holders/endgame.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/src.dir/libs/holders/endgame.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/src.dir/libs/holders/endgame.cpp.o -c /home/anton/freecell/src/libs/holders/endgame.cpp
 
 CMakeFiles/src.dir/libs/holders/endgame.cpp.i: cmake_force
@@ -166,8 +179,9 @@ src_OBJECTS = \
 "CMakeFiles/src.dir/main.cpp.o" \
 "CMakeFiles/src.dir/libs/game.cpp.o" \
 "CMakeFiles/src.dir/libs/drawSystem.cpp.o" \
-"CMakeFiles/src.dir/libs/card.cpp.o" \
+"CMakeFiles/src.dir/libs/menu.cpp.o" \
 "CMakeFiles/src.dir/libs/stats.cpp.o" \
+"CMakeFiles/src.dir/libs/card.cpp.o" \
 "CMakeFiles/src.dir/libs/holders/placeholder.cpp.o" \
 "CMakeFiles/src.dir/libs/holders/safehouse.cpp.o" \
 "CMakeFiles/src.dir/libs/holders/endgame.cpp.o"
@@ -178,14 +192,15 @@ src_EXTERNAL_OBJECTS =
 src: CMakeFiles/src.dir/main.cpp.o
 src: CMakeFiles/src.dir/libs/game.cpp.o
 src: CMakeFiles/src.dir/libs/drawSystem.cpp.o
-src: CMakeFiles/src.dir/libs/card.cpp.o
+src: CMakeFiles/src.dir/libs/menu.cpp.o
 src: CMakeFiles/src.dir/libs/stats.cpp.o
+src: CMakeFiles/src.dir/libs/card.cpp.o
 src: CMakeFiles/src.dir/libs/holders/placeholder.cpp.o
 src: CMakeFiles/src.dir/libs/holders/safehouse.cpp.o
 src: CMakeFiles/src.dir/libs/holders/endgame.cpp.o
 src: CMakeFiles/src.dir/build.make
 src: CMakeFiles/src.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable src"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/anton/freecell/src/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable src"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/src.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

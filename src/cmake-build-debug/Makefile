@@ -285,6 +285,33 @@ libs/holders/safehouse.cpp.s:
 	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/holders/safehouse.cpp.s
 .PHONY : libs/holders/safehouse.cpp.s
 
+libs/menu.o: libs/menu.cpp.o
+
+.PHONY : libs/menu.o
+
+# target to build an object file
+libs/menu.cpp.o:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/menu.cpp.o
+.PHONY : libs/menu.cpp.o
+
+libs/menu.i: libs/menu.cpp.i
+
+.PHONY : libs/menu.i
+
+# target to preprocess a source file
+libs/menu.cpp.i:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/menu.cpp.i
+.PHONY : libs/menu.cpp.i
+
+libs/menu.s: libs/menu.cpp.s
+
+.PHONY : libs/menu.s
+
+# target to generate assembly for a file
+libs/menu.cpp.s:
+	$(MAKE) -f CMakeFiles/src.dir/build.make CMakeFiles/src.dir/libs/menu.cpp.s
+.PHONY : libs/menu.cpp.s
+
 libs/stats.o: libs/stats.cpp.o
 
 .PHONY : libs/stats.o
@@ -366,6 +393,9 @@ help:
 	@echo "... libs/holders/safehouse.o"
 	@echo "... libs/holders/safehouse.i"
 	@echo "... libs/holders/safehouse.s"
+	@echo "... libs/menu.o"
+	@echo "... libs/menu.i"
+	@echo "... libs/menu.s"
 	@echo "... libs/stats.o"
 	@echo "... libs/stats.i"
 	@echo "... libs/stats.s"

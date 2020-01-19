@@ -9,7 +9,7 @@ bool cell::placeholder::isEmpty(int n) {
 
     /* Main part */
     switch (n) {
-        case 1: case 2: case 3: case 4:
+        case 0: case 1: case 2: case 3:
             flag = emptyFlags[n];
             break;
         default:
