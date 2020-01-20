@@ -400,6 +400,7 @@ void cell::game::menu::showStats(cell::game *currentGame) {
     auto current1 = tgui::Label::create("current: ");
     current1->setTextSize(12);
     current1->setPosition({current_x_1 - 0, current_y - 0});
+    g.add(current1);
 
     sf::String c2str("");
     if (currentGame->stats->current.second == cell::game::statistics::loss && currentGame->stats->current.first) {
@@ -411,6 +412,8 @@ void cell::game::menu::showStats(cell::game *currentGame) {
     auto current2 = tgui::Label::create(std::to_string(currentGame->stats->current.first) + c2str);
     current2->setTextSize(12);
     current2->setPosition({current_x_2 - 0, current_y - 0});
+    g.add(current2);
+
 
     auto b1 = tgui::Button::create("OK");
     b1->setSize(60.f, 23.f);
@@ -425,53 +428,6 @@ void cell::game::menu::showStats(cell::game *currentGame) {
     g.add(b2);
 
     /* Main part */
-    w.clear(sf::Color::White);
-
-    lWin->setPosition({stats_x_1 - 0, stats_y_1 - 0});
-    lLose->setPosition({stats_x_1 - 0, stats_y_2 - 0});
-
-    ln1->setText(std::to_string(currentGame->stats->thisSession.first));
-    ln1->setPosition({stats_x_2 - 0, stats_y_1 - 0});
-
-    ln2->setText(std::to_string(currentGame->stats->thisSession.second));
-    ln2->setPosition({stats_x_2 - 0, stats_y_2 - 0});
-
-    g.draw();
-
-    l->setText("Total");
-    l->setPosition({stats_main_x - 0, stats_main_y + stats_y_offset});
-
-    lWin->setPosition({stats_x_1 - 0, stats_y_1 + stats_y_offset});
-    lLose->setPosition({stats_x_1 - 0, stats_y_2 + stats_y_offset});
-
-    ln1->setText(std::to_string(currentGame->stats->total.first));
-    ln1->setPosition({stats_x_2 - 0, stats_y_1 + stats_y_offset});
-
-    ln2->setText(std::to_string(currentGame->stats->total.second));
-    ln2->setPosition({stats_x_2 - 0, stats_y_2 + stats_y_offset});
-
-    g.draw();
-
-    l->setText("Streaks");
-    l->setPosition({stats_main_x - 0, stats_main_y + stats_y_offset + stats_y_offset});
-
-    lWin->setText("wins:");
-    lWin->setPosition({stats_x_1 - 0, stats_y_1 + stats_y_offset + stats_y_offset});
-
-    lLose->setText("losses: ");
-    lLose->setPosition({stats_x_1 - 0, stats_y_2 + stats_y_offset + stats_y_offset});
-
-    ln1->setText(std::to_string(currentGame->stats->streaks.first));
-    ln1->setPosition({stats_x_2 - 0, stats_y_1 + stats_y_offset + stats_y_offset});
-
-    ln2->setText(std::to_string(currentGame->stats->streaks.second));
-    ln2->setPosition({stats_x_2 - 0, stats_y_2 + stats_y_offset + stats_y_offset});
-
-    g.add(current1);
-    g.add(current2);
-
-    g.draw();
-
     while (w.isOpen()) {
         sf::Event event{};
         while (w.pollEvent(event)) {
@@ -489,6 +445,62 @@ void cell::game::menu::showStats(cell::game *currentGame) {
         if (this->isChanged || this->wantToDeleteStats) {
             w.close();
         }
+
+        w.clear(sf::Color::White);
+
+        l->setText("This session");
+        l->setPosition({stats_main_x - 0, stats_main_y - 0});
+
+        lWin->setPosition({stats_x_1 - 0, stats_y_1 - 0});
+        lWin->setText("won: ");
+
+        lLose->setPosition({stats_x_1 - 0, stats_y_2 - 0});
+        lLose->setText("lost: ");
+
+        ln1->setText(std::to_string(currentGame->stats->thisSession.first));
+        ln1->setPosition({stats_x_2 - 0, stats_y_1 - 0});
+
+        ln2->setText(std::to_string(currentGame->stats->thisSession.second));
+        ln2->setPosition({stats_x_2 - 0, stats_y_2 - 0});
+
+        g.draw();
+
+        l->setText("Total");
+        l->setPosition({stats_main_x - 0, stats_main_y + stats_y_offset});
+
+        lWin->setPosition({stats_x_1 - 0, stats_y_1 + stats_y_offset});
+        lLose->setPosition({stats_x_1 - 0, stats_y_2 + stats_y_offset});
+
+        ln1->setText(std::to_string(currentGame->stats->total.first));
+        ln1->setPosition({stats_x_2 - 0, stats_y_1 + stats_y_offset});
+
+        ln2->setText(std::to_string(currentGame->stats->total.second));
+        ln2->setPosition({stats_x_2 - 0, stats_y_2 + stats_y_offset});
+
+        g.draw();
+
+        l->setText("Streaks");
+        l->setPosition({stats_main_x - 0, stats_main_y + stats_y_offset + stats_y_offset});
+
+        lWin->setText("wins:");
+        lWin->setPosition({stats_x_1 - 0, stats_y_1 + stats_y_offset + stats_y_offset});
+
+        lLose->setText("losses: ");
+        lLose->setPosition({stats_x_1 - 0, stats_y_2 + stats_y_offset + stats_y_offset});
+
+        ln1->setText(std::to_string(currentGame->stats->streaks.first));
+        ln1->setPosition({stats_x_2 - 0, stats_y_1 + stats_y_offset + stats_y_offset});
+
+        ln2->setText(std::to_string(currentGame->stats->streaks.second));
+        ln2->setPosition({stats_x_2 - 0, stats_y_2 + stats_y_offset + stats_y_offset});
+
+        current1->setVisible(true);
+        current2->setVisible(true);
+
+        g.draw();
+
+        current1->setVisible(false);
+        current2->setVisible(false);
 
         w.display();
     }

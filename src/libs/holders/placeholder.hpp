@@ -14,7 +14,7 @@ namespace cell {
         explicit placeholder(sf::RenderWindow *window);
         ~placeholder() = default;
 
-        bool isEmpty(int n = 0);
+        bool isEmpty(int n = -1);
 
         virtual void put(card *c, const sf::Vector2i &pos) = 0;
         virtual void put(card *c, int whichOne) = 0;

@@ -12,6 +12,20 @@ utility
 SFML/Graphics.hpp
 -
 
+/home/anton/freecell/src/libs/game.cpp
+utility
+-
+algorithm
+-
+ctime
+-
+array
+-
+iostream
+-
+game.hpp
+/home/anton/freecell/src/libs/game.hpp
+
 /home/anton/freecell/src/libs/game.hpp
 deque
 -
@@ -43,10 +57,4 @@ array
 /home/anton/freecell/src/libs/holders/safehouse.hpp
 placeholder.hpp
 /home/anton/freecell/src/libs/holders/placeholder.hpp
-
-/home/anton/freecell/src/libs/stats.cpp
-fstream
--
-game.hpp
-/home/anton/freecell/src/libs/game.hpp
 

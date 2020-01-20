@@ -185,7 +185,7 @@ int cell::game::exec() {
                             this->selectGame();
                             break;
                         case sf::Keyboard::F5:
-//                            this->m->showStats(stats);
+                            this->m->showStats(this);
                             break;
                         case sf::Keyboard::F10:
                             if (this->state != cell::game::GAMESTATE::win) {
@@ -289,8 +289,12 @@ void cell::game::stop() {
     /* Initializing variables */
     this->state = cell::game::GAMESTATE::win;
     this->stats->gameWin();
+
+    this->draw->drawField();
     this->draw->drawMan(this->state);
+    this->draw->drawEndgame(this->eg);
     this->window->display();
+
     this->m->setUndoEnabled(false);
 
     switch (this->m->startNewGame(this)) {
@@ -655,8 +659,8 @@ bool cell::game::tryAutoPlay() {
                         }
                         this->eg->put(i, j);
                         isMoved = true;
+                        break;
                     }
-                    break;
                 } else if (i->canMoveEndgame(const_cast<card &>(this->eg->getHouse()[j].top()))) {
                     if (i->getPos() == cell::card::POSITION::safehouse) {
                         this->sh->get(i->getCoords());
