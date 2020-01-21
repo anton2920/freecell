@@ -1,4 +1,0 @@
-/home/anton/Downloads/clion-2019.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/anton/freecell/src
--- Configuring done
--- Generating done
--- Build files have been written to: /home/anton/freecell/src/cmake-build-debug
