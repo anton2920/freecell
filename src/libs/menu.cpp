@@ -31,7 +31,7 @@ cell::game::menu::menu(game *currentGame) {
     this->bar->connectMenuItem(gameMenu, undoMenu, &cell::game::loadState, currentGame);
 
     this->bar->addMenuItem(exitMenu);
-    this->bar->connectMenuItem(gameMenu, exitMenu, &sf::RenderWindow::close, w);
+    this->bar->connectMenuItem(gameMenu, exitMenu, &cell::game::setIsClosedEvent, currentGame, true);
 
     this->gui->add(this->bar);
 

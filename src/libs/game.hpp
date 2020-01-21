@@ -258,6 +258,8 @@ namespace cell {
         random r{};
         sf::RenderWindow *window{};
 
+        bool isClosedEvent = false;
+
         void deal();
         cell::card *selectedCard = nullptr;
 
@@ -289,6 +291,8 @@ namespace cell {
         void stop();
 
         void clearGame();
+
+        void setIsClosedEvent(bool _isClosedEvent);
 
         [[nodiscard]] cell::card *findCard(const sf::Vector2f &coords) const;
         [[nodiscard]] cell::card *findBottomCard(const sf::Vector2f &coords) const;

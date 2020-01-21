@@ -1,6 +1,6 @@
 /**/*.o
 src/.idea/
-src/cmake-buid-debug
+src/cmake-build-debug
 src/CMakeLists.txt
 Makefile
 Makefile.in

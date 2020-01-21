@@ -102,6 +102,17 @@ int cell::game::exec() {
             if (this->m->getGui()->handleEvent(event)) {
                 continue;
             }
+            if (isClosedEvent) {
+                if (this->state == cell::game::GAMESTATE::game) {
+                    if (this->m->wantToResign(this)) {
+                        this->window->close();
+                    } else {
+                        this->isClosedEvent = false;
+                    }
+                } else {
+                    this->window->close();
+                }
+            }
             switch (event.type) {
                 case sf::Event::Closed:
                     if (this->state == cell::game::GAMESTATE::game) {
@@ -739,4 +750,10 @@ void cell::game::selectGame() {
         } while (gameNum < 1 || gameNum > 1000000);
         this->start(gameNum);
     }
+}
+
+void cell::game::setIsClosedEvent(bool _isClosedEvent) {
+
+    /* Initializing variables */
+    game::isClosedEvent = _isClosedEvent;
 }
