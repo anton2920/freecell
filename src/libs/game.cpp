@@ -1,11 +1,46 @@
-#include <utility>
-#include <algorithm>
-#include <ctime>
-#include <array>
+#include "game.hpp"
+
+/* Including other headers */
+#if (HAVE_ALGORITHM == 1)
+    #include <algorithm>
+#endif
+
+#if (HAVE_CTIME)
+    #include <ctime>
+#endif
+
+#if (HAVE_ARRAY == 1)
+    #include <array>
+#endif
 
 #include <iostream> // Starting to debug (tnx to Ilya)
 
-#include "game.hpp"
+char *cell::getPath() {
+
+    /* Initializing variables */
+    char *p{};
+
+    /* Main part */
+#ifdef _WIN32
+    #define KIB (100)
+	char hp[KIB] = {0}, hp1[KIB] = {0};
+	strcpy(hp, "");
+	strcat(hp, "pics\\");
+	strcpy(hp1, hp);
+#endif
+#ifdef __unix__
+#define KIB (1024)
+    char hp[KIB] = {}, hp1[KIB] = {};
+    strcat(hp, getenv("HOME"));
+    strcat(hp, "/.local/share/FreeCell/");
+    strcpy(hp1, hp);
+#endif
+
+    p = strdup(hp1);
+
+    /* Returning value */
+    return p;
+}
 
 int cell::game::exec() {
 

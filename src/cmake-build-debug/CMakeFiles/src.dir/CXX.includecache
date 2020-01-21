@@ -6,27 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/anton/freecell/src/libs/card.cpp
-card.hpp
-/home/anton/freecell/src/libs/card.hpp
-game.hpp
-/home/anton/freecell/src/libs/game.hpp
+/home/anton/freecell/src/libs/FreeCell_config.h
 
 /home/anton/freecell/src/libs/card.hpp
+FreeCell_config.h
+/home/anton/freecell/src/libs/FreeCell_config.h
 utility
 -
 SFML/Graphics.hpp
 -
 
-/home/anton/freecell/src/libs/drawSystem.cpp
-iostream
--
+/home/anton/freecell/src/libs/game.cpp
 game.hpp
 /home/anton/freecell/src/libs/game.hpp
-
-/home/anton/freecell/src/libs/game.cpp
-utility
--
 algorithm
 -
 ctime
@@ -35,10 +27,10 @@ array
 -
 iostream
 -
-game.hpp
-/home/anton/freecell/src/libs/game.hpp
 
 /home/anton/freecell/src/libs/game.hpp
+FreeCell_config.h
+/home/anton/freecell/src/libs/FreeCell_config.h
 deque
 -
 cstdint
@@ -54,47 +46,19 @@ holders/safehouse.hpp
 holders/endgame.hpp
 /home/anton/freecell/src/libs/holders/endgame.hpp
 
-/home/anton/freecell/src/libs/holders/endgame.cpp
-endgame.hpp
 /home/anton/freecell/src/libs/holders/endgame.hpp
-safehouse.hpp
-/home/anton/freecell/src/libs/holders/safehouse.hpp
-
-/home/anton/freecell/src/libs/holders/endgame.hpp
+placeholder.hpp
+/home/anton/freecell/src/libs/holders/placeholder.hpp
 stack
 -
-placeholder.hpp
-/home/anton/freecell/src/libs/holders/placeholder.hpp
-
-/home/anton/freecell/src/libs/holders/placeholder.cpp
-placeholder.hpp
-/home/anton/freecell/src/libs/holders/placeholder.hpp
 
 /home/anton/freecell/src/libs/holders/placeholder.hpp
-array
--
 ../card.hpp
 /home/anton/freecell/src/libs/card.hpp
-
-/home/anton/freecell/src/libs/holders/safehouse.cpp
-safehouse.hpp
-/home/anton/freecell/src/libs/holders/safehouse.hpp
+array
+-
 
 /home/anton/freecell/src/libs/holders/safehouse.hpp
 placeholder.hpp
 /home/anton/freecell/src/libs/holders/placeholder.hpp
-
-/home/anton/freecell/src/libs/menu.cpp
-game.hpp
-/home/anton/freecell/src/libs/game.hpp
-
-/home/anton/freecell/src/libs/stats.cpp
-fstream
--
-game.hpp
-/home/anton/freecell/src/libs/game.hpp
-
-/home/anton/freecell/src/main.cpp
-libs/game.hpp
-/home/anton/freecell/src/libs/game.hpp
 

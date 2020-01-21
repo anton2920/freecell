@@ -1,10 +1,25 @@
 #ifndef SRC_GAME_HPP
 #define SRC_GAME_HPP
 
+/* Including config header file */
+#include "FreeCell_config.h"
+
+/* Including other headers */
+#if (HAVE_DEQUE == 1)
 #include <deque>
+#endif
+
+#if (HAVE_CSTDINT == 1)
 #include <cstdint>
+#endif
+
+#if (HAVE_SFML_GRAPHICS_HPP == 1)
 #include <SFML/Graphics.hpp>
+#endif
+
+#if (HAVE_TGUI_TGUI_HPP == 1)
 #include <TGUI/TGUI.hpp>
+#endif
 
 #include "card.hpp"
 #include "holders/safehouse.hpp"
@@ -14,7 +29,7 @@ namespace cell {
     const int window_panel_size = 20;
     const int additionalHeight = 7;
 
-    auto constexpr globalPath = "../files/";
+    char *getPath();
 
     class random {
     public:

@@ -1,8 +1,17 @@
 #ifndef SRC_CARD_HPP
 #define SRC_CARD_HPP
 
-#include <utility>
-#include <SFML/Graphics.hpp>
+/* Including config header file */
+#include "FreeCell_config.h"
+
+/* Including other headers */
+#if (HAVE_UTILITY == 1)
+    #include <utility>
+#endif
+
+#if (HAVE_SFML_GRAPHICS_HPP == 1)
+    #include <SFML/Graphics.hpp>
+#endif
 
 namespace cell {
     class card {

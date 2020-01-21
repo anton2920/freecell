@@ -405,7 +405,7 @@ void cell::game::menu::showStats(cell::game *currentGame) {
     sf::String c2str("");
     if (currentGame->stats->current.second == cell::game::statistics::loss && currentGame->stats->current.first) {
         c2str = " loss";
-    } else if (currentGame->stats->current.second == cell::game::statistics::win) {
+    } else if (currentGame->stats->current.second == cell::game::statistics::win && currentGame->stats->current.first) {
         c2str = " win";
     }
 

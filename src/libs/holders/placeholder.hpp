@@ -1,9 +1,12 @@
 #ifndef SRC_PLACEHOLDER_HPP
 #define SRC_PLACEHOLDER_HPP
 
-#include <array>
-
+/* Including other headers */
 #include "../card.hpp"
+
+#if (HAVE_ARRAY == 1)
+    #include <array>
+#endif
 
 namespace cell {
     class placeholder {

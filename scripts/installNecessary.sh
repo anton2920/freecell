@@ -1,1 +1,0 @@
-mkdir -p ${HOME}/.local/share/FreeCell/ && cp -Rf ./src/files/. ${HOME}/.local/share/FreeCell/.

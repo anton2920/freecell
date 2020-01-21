@@ -1,9 +1,11 @@
 #ifndef SRC_ENDGAME_HPP
 #define SRC_ENDGAME_HPP
 
-#include <stack>
-
 #include "placeholder.hpp"
+
+#if (HAVE_STACK == 1)
+    #include <stack>
+#endif
 
 namespace cell {
     class endgame : public placeholder {

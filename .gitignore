@@ -21,8 +21,8 @@ src/Makefile.in
 src/libFreeCell.la
 src/libs/.deps/
 src/libs/.dirstamp
-src/libs/FreeCell_config.h
 src/libs/FreeCell_config.h.in
+src/libs/FreeCell_config.h.in~
 src/libs/holders/.deps/
 src/libs/holders/.dirstamp
 src/libs/holders/libFreeCell_la-endgame.lo

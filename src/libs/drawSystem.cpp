@@ -6,12 +6,15 @@ cell::game::drawSystem::drawSystem(sf::RenderWindow *window) {
 
     /* Initializing variables */
     this->window = window;
+    char *p = cell::getPath();
 
     /* Main part */
-    if (!this->texture.loadFromFile(sf::String(cell::globalPath) + sf::String("assets.png"))) {
+    if (!this->texture.loadFromFile(p + sf::String("assets.png"))) {
         std::cerr << "Couldn't load texture file!\n";
-        return;
+        exit(-1);
     }
+
+    free(p);
 }
 
 cell::game::drawSystem::drawSystem(sf::RenderWindow *window, const sf::Texture &texture)

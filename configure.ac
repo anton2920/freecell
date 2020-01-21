@@ -15,7 +15,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # Enable «automake» to simplify creating makefiles:
 AM_INIT_AUTOMAKE
-AC_CONFIG_FILES([Makefile scripts/Makefile src/Makefile doc/Makefile man/Makefile examples/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile man/Makefile examples/Makefile scripts/Makefile])
 
 # Look for a C (CXX) compiler:
 AC_LANG([C++])
@@ -56,7 +56,7 @@ AC_CHECK_HEADERS([TGUI/TGUI.hpp], [], [
 	])
 
 
-AC_CHECK_HEADERS([utility algorithm ctime array deque iostream cstdint fstream], [], [
+AC_CHECK_HEADERS([utility algorithm ctime array deque iostream cstdint fstream stack], [], [
 	AC_MSG_ERROR([unable to find necessary headers])
 	])
 

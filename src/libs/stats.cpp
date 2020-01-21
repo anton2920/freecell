@@ -1,11 +1,15 @@
-#include <fstream>
-
 #include "game.hpp"
+
+#if (HAVE_FSTREAM == 1)
+    #include <fstream>
+#endif
 
 cell::game::statistics::statistics() {
 
-    /* I/O flow */
-    std::ifstream inputs(std::string(globalPath) + std::string(recFileName), std::ios_base::in | std::ios_base::binary);
+    /* Initializing variables */
+    char *p = cell::getPath();
+
+    std::ifstream inputs(std::string(p) + std::string(recFileName), std::ios_base::in | std::ios_base::binary);
     struct {
         statType first;
         statType second;
@@ -16,6 +20,9 @@ cell::game::statistics::statistics() {
         inputs >> *this;
         inputs.close();
     }
+
+    /* Main part */
+    free(p);
 }
 
 std::ostream &cell::operator<<(std::ostream &stream, const cell::game::statistics &st) {
@@ -71,7 +78,8 @@ std::istream &cell::operator>>(std::istream &stream, cell::game::statistics &st)
 cell::game::statistics::~statistics() {
 
     /* Initializing variables */
-    std::ofstream outputs(std::string(globalPath) + std::string(recFileName), std::ios_base::out | std::ios_base::binary);
+    char *p = cell::getPath();
+    std::ofstream outputs(std::string(p) + std::string(recFileName), std::ios_base::out | std::ios_base::binary);
 
     /* I/O flow */
     if (outputs.is_open()) {
@@ -79,6 +87,8 @@ cell::game::statistics::~statistics() {
         outputs.close();
     }
 
+    /* Main part */
+    free(p);
 }
 
 void cell::game::statistics::gameWin() {
@@ -126,6 +136,7 @@ void cell::game::statistics::clear() {
     this->total.first = this->total.second = 0;
     this->streaks.first = this->streaks.second = 0;
     this->current.first = 0;
+    this->current.second = cell::game::statistics::loss;
 
 //    std::ofstream outputs(std::string(globalPath) + std::string("records.bin"), std::ios_base::out | std::ios_base::binary);
 

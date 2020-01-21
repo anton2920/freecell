@@ -1,1 +1,1 @@
-bin_SCRIPTS = installNecessary.sh
+bin_SCRIPTS = ./pics.sh
