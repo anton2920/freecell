@@ -11,7 +11,7 @@ cell::game::drawSystem::drawSystem(sf::RenderWindow *window) {
     /* Main part */
     if (!this->texture.loadFromFile(p + sf::String("assets.png"))) {
         std::cerr << "Couldn't load texture file!\n";
-        exit(-1);
+        //exit(-1);
     }
 
     free(p);

@@ -145,7 +145,7 @@ long cell::game::menu::chooseGameNumber(cell::game *currentGame) {
     /* Initializing variables */
     long answer = -1;
     sf::RenderWindow w(sf::VideoMode(180, 122), "Game Number", sf::Style::Titlebar | sf::Style::Close);
-    w.setVerticalSyncEnabled(true);
+	w.setVerticalSyncEnabled(true);
     auto parPos = currentGame->window->getPosition();
     auto parSize = currentGame->window->getSize();
     w.setPosition(sf::Vector2i(parPos.x + parSize.x / 2 - w.getSize().x / 2, parPos.y + parSize.y / 2 - w.getSize().y / 2));
@@ -216,7 +216,7 @@ cell::game::powerMoveAnswer cell::game::menu::askForPowerMove(cell::game *curren
 
     /* Initializing variables */
     sf::RenderWindow w(sf::VideoMode(226, 130), "Move to Empty Column", sf::Style::Titlebar | sf::Style::Close);
-    w.setVerticalSyncEnabled(true);
+	w.setVerticalSyncEnabled(true);
     auto parPos = currentGame->window->getPosition();
     auto parSize = currentGame->window->getSize();
     w.setPosition(sf::Vector2i(parPos.x + parSize.x / 2 - w.getSize().x / 2, parPos.y + parSize.y / 2 - w.getSize().y / 2));
@@ -282,7 +282,7 @@ cell::game::menu::gameOverAnswer cell::game::menu::startNewGame(cell::game *curr
     this->goa = newCancel;
 
     sf::RenderWindow w(sf::VideoMode(203, 130), "Game Over", sf::Style::Titlebar | sf::Style::Close);
-    w.setVerticalSyncEnabled(true);
+	w.setVerticalSyncEnabled(true);
     auto parPos = currentGame->window->getPosition();
     auto parSize = currentGame->window->getSize();
     w.setPosition(sf::Vector2i(parPos.x + parSize.x / 2 - w.getSize().x / 2, parPos.y + parSize.y / 2 - w.getSize().y / 2));
@@ -370,7 +370,7 @@ void cell::game::menu::showStats(cell::game *currentGame) {
     this->goa = newCancel;
 
     sf::RenderWindow w(sf::VideoMode(225, 219), "FreeCell Statistics", sf::Style::Titlebar | sf::Style::Close);
-    w.setVerticalSyncEnabled(true);
+	w.setVerticalSyncEnabled(true);
     auto parPos = currentGame->window->getPosition();
     auto parSize = currentGame->window->getSize();
     w.setPosition(sf::Vector2i(parPos.x + parSize.x / 2 - w.getSize().x / 2, parPos.y + parSize.y / 2 - w.getSize().y / 2));
@@ -517,7 +517,7 @@ void cell::game::menu::showClearStats(cell::game *currentGame) {
 
     /* Initializing variables */
     sf::RenderWindow w(sf::VideoMode(288, 82), cell::game::TITLE, sf::Style::Titlebar | sf::Style::Close);
-    w.setVerticalSyncEnabled(true);
+	w.setVerticalSyncEnabled(true);
     auto parPos = currentGame->window->getPosition();
     auto parSize = currentGame->window->getSize();
     w.setPosition(sf::Vector2i(parPos.x + parSize.x / 2 - w.getSize().x / 2, parPos.y + parSize.y / 2 - w.getSize().y / 2));

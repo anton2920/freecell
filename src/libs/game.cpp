@@ -25,7 +25,7 @@ char *cell::getPath() {
     #define KIB (100)
 	char hp[KIB] = {0}, hp1[KIB] = {0};
 	strcpy(hp, "");
-	strcat(hp, "pics\\");
+	strcat(hp, "assets\\");
 	strcpy(hp1, hp);
 #endif
 #ifdef __unix__
