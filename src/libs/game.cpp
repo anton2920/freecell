@@ -322,7 +322,7 @@ void cell::game::deal() {
     /* Main part */
     for (auto j = values.rbegin(); j != values.rend(); ++j) {
         for (auto i = suits.rbegin(); i != suits.rend(); ++i) {
-            this->table.emplace_back(std::pair(*j, *i), sf::Vector2f(0, 0), cell::card::POSITION::tabled);
+            this->table.emplace_back(std::pair<cell::card::VALUE, cell::card::SUIT>(*j, *i), sf::Vector2f(0, 0), cell::card::POSITION::tabled);
         }
     }
 
