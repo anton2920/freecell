@@ -339,6 +339,7 @@ void cell::game::stop() {
     this->draw->drawField();
     this->draw->drawMan(this->state);
     this->draw->drawEndgame(this->eg);
+    this->m->cardsLeftLabel();
     this->window->display();
 
     this->m->setUndoEnabled(false);
@@ -643,14 +644,18 @@ bool cell::game::generateBottomCardsList(std::vector<card *> &dest) {
     int counter = 0;
 
     /* Main part */
-    dest.push_back(findCard);
+    if (findCard != nullptr) {
+        dest.push_back(findCard);
+    }
     for (int i = 0; i < 7; ++i) {
         if (findCard != nullptr) {
             ++counter;
         }
         coords.x += cell::card::card_w + cell::game::drawSystem::card_row_space;
         findCard = this->findBottomCard(coords);
-        dest.push_back(findCard);
+        if (findCard != nullptr) {
+            dest.push_back(findCard);
+        }
     }
 
     for (int i = 0; i < 4; ++i) {
@@ -671,13 +676,13 @@ bool cell::game::tryAutoPlay() {
     bool useless = false, isMoved = false;
 
     /* Main part */
-    if (this->generateBottomCardsList(l1)) {
+    if (this->generateBottomCardsList(l1) || l1.size() == 1 || (l1.size() == 2 && l1[0] == nullptr)) {
         useless = true;
     }
     for (auto &i : l1) {
-        if (i == nullptr) {
+        /*if (i == nullptr) {
             continue;
-        }
+        }*/
         if (i->getPos() == cell::card::POSITION::endgame) {
             continue;
         } else if (i->getType().first == cell::card::VALUE::ace || i->getType().first == cell::card::VALUE::two) {
