@@ -80,6 +80,8 @@ int cell::game::exec() {
                                                                               sf::Vector2i(mouseCoords.x, mouseCoords.y))) != nullptr) {
                     this->draw->drawCursor(cell::game::drawSystem::down);
                     this->window->setMouseCursorVisible(false);
+                } else {
+                    this->window->setMouseCursorVisible(true);
                 }
             } else if (this->sh->canPut(sf::Vector2i(mouseCoords.x, mouseCoords.y)) ||
                     this->eg->canPut(*selectedCard, sf::Vector2i(mouseCoords.x, mouseCoords.y))) {
